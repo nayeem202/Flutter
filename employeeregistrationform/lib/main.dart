@@ -55,6 +55,13 @@ class MyApp extends StatelessWidget {
             children: [
 
               TextFormField(
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter some text';
+                  }
+                  return null;
+                },
+
                 controller: nameController,
                 initialValue: null,
                 decoration: InputDecoration(
@@ -170,7 +177,7 @@ class MyApp extends StatelessWidget {
                     print(name);
                     var emp = EmployeeModel(name, phone, salary, gen, department, address);
                     var emController = EmployeeController();
-                    emController.save(context, emp);
+                    emController.save(context, emp).then((value) => print(value.toString()));
                   },
                   child: const Text('Submit'),
                 ),
